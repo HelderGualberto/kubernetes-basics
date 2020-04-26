@@ -3,4 +3,4 @@ kind: StorageClass
 metadata:
   name: slow
 provisioner: kubernetes.io/no-provisioner # The type of volume to create (AWS,GCP,Azure,local)
-volumeBindingMode: WaitForFirstConsumer
+volumeBindingMode: Immediate

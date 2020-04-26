@@ -6,9 +6,12 @@ spec:
   containers:
     - name: mycontainer
       image: nginx
+      ports:
+      - containerPort: 80
+        name: http
       volumeMounts:
       - mountPath: "/var/www/html"
-        name: my-pv
+        name: mypv
   volumes:
     - name: mypv
       persistentVolumeClaim:
