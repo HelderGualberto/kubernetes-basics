@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: example-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 4Gi
+  storageClassName: slow # Name of the before clreated class
+  selector: # Used to filter volumes to Bind
+    matchLabels: # Will bind only to PVs that match labels
+      name: example-pv # Will bind to PV named example-pv

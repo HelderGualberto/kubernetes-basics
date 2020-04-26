@@ -1,0 +1,16 @@
+---
+# A persistent volume is an abstraction for alocating persistent disk on
+# some storage service. 
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: example-pv
+spec:
+  storageClassName: slow
+  volumeMode: Filesystem # Whether to mount the block with a file system format
+  accessModes:
+    - "ReadWriteOnce"
+  capacity:
+    storage: "5Gi"
+  hostPath: # Param for Node storage allocation
+    path: /example-pv-path # Path where the storage will be mount on nodes.
