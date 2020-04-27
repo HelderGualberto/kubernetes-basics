@@ -107,3 +107,26 @@ A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar 
 
 To enable dynamic storage provisioning based on storage class, the cluster administrator needs to enable the DefaultStorageClass admission controller on the API server. This can be done, for example, by ensuring that DefaultStorageClass is among the comma-delimited, ordered list of values for the --enable-admission-plugins flag of the API server component. For more information on API server command-line flags, check kube-apiserver documentation.
 
+### Secrets
+
+A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. Such information might otherwise be put in a Pod specification or in an image. Users can create secrets and the system also creates some secrets.
+
+To use a secret, a Pod needs to reference the secret. A secret can be used with a Pod in two ways:
+
+- As files in a volume mounted on one or more of its containers.
+- By the kubelet when pulling images for the Pod.
+
+The Secret contains two maps: **data** and **stringData**. The data field is used to store arbitrary data, encoded using base64. The stringData field is provided for convenience, and allows you to provide secret data as unencoded strings.
+
+You can set the file access permission bits for a single Secret key. If you don’t specify any permissions, 0644 is used by default. You can also set a default mode for the entire Secret volume and override per key if needed.
+
+FEATURE STATE: Kubernetes v1.18 
+
+The Kubernetes alpha feature Immutable Secrets and ConfigMaps provides an option to set individual Secrets and ConfigMaps as immutable. For clusters that extensively use Secrets (at least tens of thousands of unique Secret to Pod mounts), preventing changes to their data has the following advantages:
+
+protects you from accidental (or unwanted) updates that could cause applications outages
+improves performance of your cluster by significantly reducing load on kube-apiserver, by closing watches for secrets marked as immutable.
+
+#### Secret as Env
+
+When using a secret as an environment variable its not necessary to declare is as a volume. Just point to the created secret resource name. 
