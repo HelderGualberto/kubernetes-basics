@@ -1,0 +1,10 @@
+# efines data as simple yaml format
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-config-map-yaml
+data:
+  configPath: "/etc/app.conf"
+  maxheap: "4"
+  minHeap: "2"
+  hostname: "app.local"

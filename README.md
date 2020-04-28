@@ -129,4 +129,29 @@ improves performance of your cluster by significantly reducing load on kube-apis
 
 #### Secret as Env
 
-When using a secret as an environment variable its not necessary to declare is as a volume. Just point to the created secret resource name. 
+When using a secret as an environment variable its not necessary to declare is as a volume. Just point to the created secret resource name.
+
+### Config Map
+
+A config map is a structure to store key value pairs in Kubernets. It could be consumed as Envs or files.
+
+Config Maps are automatically updated.
+
+There are several ways to create a ConfigMap over kubectl create command, for example:
+
+Creates a ConfigMap based on configurations inside the properties file.
+```bash
+kubectl create configmap <config-map-name> --from-file=path/to/file.properties
+```
+
+Creates a ConfigMap for multiple files
+```bash
+kubectl create configmap <config-map-name> --from-file=path/to/file properties --from-file=path/to/other/file.properties
+```
+
+Creates a ConfigMap for all files in the tree.
+```bash
+kubectl create configmap <config-map-name> properties --from-file=path/to/files/
+```
+
+It's possible to use yaml to create ConfigMap objects but it does not support geting data directelly from files

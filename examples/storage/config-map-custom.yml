@@ -1,0 +1,13 @@
+# Defines data as custom format other then yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-config-map-json
+data:
+  conf.json: |
+    {
+      "configPath": "/etc/app.conf"
+      "maxheap": 4
+      "minHeap": 2
+      "hostname": "app.local"
+    }
