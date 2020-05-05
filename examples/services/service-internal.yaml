@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: internal-service
+spec:
+  type: ClusterIP # This is the default service type, it could be ommited
+  selector:
+    app: service-example # Selector used to auto create endpoints that poitns to matched Resources (Deloyment/Pod/ReplicaSet)
+  ports:
+    - protocol: TCP
+      port: 8080 # Port to use on ClusterNode
+      targetPort: 80 # Container exposed port

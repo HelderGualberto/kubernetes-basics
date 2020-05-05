@@ -13,6 +13,6 @@ spec:
   accessModes:
     - "ReadWriteOnce"
   capacity:
-    storage: "5Gi"
+    storage: "5G"
   hostPath: # Param for Node storage allocation
     path: /example-pv-path # Path where the storage will be mount on nodes.

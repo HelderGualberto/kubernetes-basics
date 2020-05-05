@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: full-example-pod
+spec:
+  containers:
+    - name: full-example
+      image: nginx
+      env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: example-secret
+              key: literalUsername
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: example-secret
+              key: base64Password
+      volumeMounts:
+        - name: mycm
+          mountPath: /tmp/cm
+        - name: mypvc
+          mountPath: /tmp/pvc
+      resources:
+        limits:
+          cpu: "1"
+          memory: "200Mi"
+  volumes:
+    - name: mypvc
+      persistentVolumeClaim:
+        claimName: example-pvc
+    - name: mycm
+      configMap:
+          name: example-config-map-yaml

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-service
+spec: # Do not define selectors so it wont bind to any Pod/Deployment automatically. Instead create an Endpoint
+  type: ClusterIP # This is the default service type, it could be ommited
+  ports:
+    - protocol: TCP
+      port: 8080 # Port on ClusterNode
+      targetPort: 80 # Port on container

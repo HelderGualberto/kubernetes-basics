@@ -155,3 +155,21 @@ kubectl create configmap <config-map-name> properties --from-file=path/to/files/
 ```
 
 It's possible to use yaml to create ConfigMap objects but it does not support geting data directelly from files
+
+## Services
+
+A service makes interface to connect to a set of Pods. It's binded via selectors.
+A Service Could map multiple ports and protocols at the same time.
+
+A service is composed by two main blocks, the Service properly and an Endpoint.
+
+The service describes wich port and portocol will be exposed and the type of the LoadBalancer, but the Endpoint defines with is the target to bind, it means wich is the IP and port from from origin to map. This allows Kubernetes to use service to Map external services on VMs for example.
+To use a service with a custom Endpoint dont apply any selector on service creation, so it wont create an Endpoint automatically.
+
+Service for internal pods:
+- Uses selectors to define wich Pods to map in Service creation. It will automatically create a new Endpoint
+
+Service for external services
+- Create a Service without setting selectors and then create an Endpoint object with the target specification.
+
+A best alternative for scalability is using **EndpointSlices**.
