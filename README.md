@@ -173,3 +173,40 @@ Service for external services
 - Create a Service without setting selectors and then create an Endpoint object with the target specification.
 
 A best alternative for scalability is using **EndpointSlices**.
+
+For some parts of your application (for example, frontends) you may want to expose a Service onto an external IP address, that’s outside of your cluster.
+
+Kubernetes ServiceTypes allow you to specify what kind of Service you want. The default is ClusterIP.
+
+Type values and their behaviors are:
+
+*ClusterIP*: Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default ServiceType.
+*NodePort*: Exposes the Service on each Node’s IP at a static port (the NodePort). A ClusterIP Service, to which the NodePort Service routes, is automatically created. You’ll be able to contact the NodePort Service, from outside the cluster, by requesting <NodeIP>:<NodePort>.
+*LoadBalancer*: Exposes the Service externally using a cloud provider’s load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
+*ExternalName*: Maps the Service to the contents of the externalName field (e.g. foo.bar.example.com), by returning a CNAME record
+
+with its value. No proxying of any kind is set up.
+
+## Ingress
+
+An API object that manages external access to the services in a cluster, typically HTTP.
+
+Ingress may provide load balancing, SSL termination and name-based virtual hosting.
+
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
+
+An ingress acts as a layer to connect external internet inside the cluster.
+
+You must have an ingress controller to satisfy an Ingress. Only creating an Ingress resource has no effect.
+
+You may need to deploy an Ingress controller such as ingress-nginx. You can choose from a number of Ingress controllers.
+
+Ideally, all Ingress controllers should fit the reference specification. In reality, the various Ingress controllers operate slightly differently.
+
+[Ingress controller types](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+
+IMPORTANT:
+
+To use an ingress you MUST have a LoadBalancer provider of any kind. Ingresses uses LoadBalancer to create a public access IP and exposes the application to public network.
+
+On Minikube you MUST enable the ingress addon, that installs the nginx ingress controller.

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: aws-elb
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true" # For internal balancing on AWS
+spec:
+  type: LoadBalancer
+  selector:
+    app: service-example
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 80
+      protocol: TCP
+status:
+  loadBalancer: # Optionally it's possible to set a static IP for the LoadBalancer
+    ingress:
+    - ip: 192.0.2.127

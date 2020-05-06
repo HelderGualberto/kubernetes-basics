@@ -1,0 +1,11 @@
+# OBS: On Minikube you MUST enable the ingress addon
+# > minikube addons enable ingress
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: example-default-ingress
+spec:
+  backend:
+    serviceName: internal-service
+    servicePort: 8080

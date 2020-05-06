@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcp-elb
+  annotations:
+    cloud.google.com/load-balancer-type: "Internal" # For internal balancing on GCP
+spec:
+  type: LoadBalancer # Set the type to LoadBalancer
+  selector:
+    app: service-example
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 80
+      protocol: TCP
