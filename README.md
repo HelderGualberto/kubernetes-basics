@@ -11,6 +11,13 @@ source <(kubectl completion bash) # setup autocomplete in bash into the current 
 echo "source <(kubectl completion bash)" >> ~/.bashrc # add autocomplete permanently to your bash shell.
 ```
 
+## Setup Helm Tiller user
+```bash
+kubectl create serviceaccount --namespace kube-system tiller
+kubectl create clusterrolebinding tiller-cluster-rule --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+helm init --service-account tiller
+```
+
 ## Most used commands to inspect your resources and cluster
 
 This command describe cluster information and current evets. It shows erros like memory issues and others occuring inside nodes.

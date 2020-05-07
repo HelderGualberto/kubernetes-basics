@@ -8,9 +8,14 @@ spec:
     image: nginx
     volumeMounts:
     - name: json-configmap # Must be the same defined in volumes
-      mountPath: /tmp/json
+      mountPath: /tmp/json/conf.json # Use this to mount a single file inside a directory
+      subPath: conf.json             # You must specify the file name in mountPath and subPath
     - name: yaml-configmap
       mountPath: /tmp/yaml
+    resources:
+      limits:
+        cpu: "0.1"
+        memory: "100m"
   volumes:
   - name: json-configmap
     configMap:
