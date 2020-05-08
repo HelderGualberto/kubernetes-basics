@@ -9,5 +9,5 @@ spec:
     requests:
       storage: "10Gi"
   accessModes:
-    - "ReadWriteOnce"
+    - "ReadWriteOnce" # ReadOnlyMany
   storageClassName: gce-standard

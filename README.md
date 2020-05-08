@@ -117,12 +117,14 @@ When creating a new PV one could specify the desired storage class, automaticall
 - StorageOS
 
 #### Persistent Volume Modes
+https://kubernetes.io/docs/concepts/storage/persistent-volumes/#raw-block-volume-support
 
 - ReadWriteOnce – the volume can be mounted as read-write by a single node
 - ReadOnlyMany – the volume can be mounted read-only by many nodes
 - ReadWriteMany – the volume can be mounted as read-write by many nodes
 
 ### Persistent Volume Claim
+
 
 A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar to a Pod. Pods consume node resources and PVCs consume PV resources. Pods can request specific levels of resources (CPU and Memory). Claims can request specific size and access modes (e.g., they can be mounted once read/write or many times read-only).
 

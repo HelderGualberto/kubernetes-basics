@@ -1,0 +1,18 @@
+# A Headless Service is created when the ClusterIP is set to None.
+# It's used in statefulsets to provision static and controled network addesses without the need of kube-proxy.
+# For headless Services, a cluster IP is not allocated, kube-proxy does not handle
+# these Services, and there is no load balancing or proxying done by the platform for them.
+# How DNS is automatically configured depends on whether the Service has selectors defined.
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None # Headless Service
+  selector:
+    app: nginx
