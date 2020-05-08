@@ -1,0 +1,21 @@
+# By default a deployment creates a replicaset
+
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: example-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx # Will bind with all other deployments that have templates with this label
+  template:
+    metadata:
+      labels:
+        app: nginx # Must be unique among the other deployments
+    spec:
+      containers: # It's not possible to use resources inside containers managed by a Deployment
+        - name: nginx-base
+          image: nginx
+          ports:
+            - containerPort: 80

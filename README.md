@@ -11,6 +11,20 @@ source <(kubectl completion bash) # setup autocomplete in bash into the current 
 echo "source <(kubectl completion bash)" >> ~/.bashrc # add autocomplete permanently to your bash shell.
 ```
 
+## Rollout deployments
+
+```bash
+kubectl rollout history deployment <deployment-name>
+kubectl rollout status deployment <deployment-name>
+kubectl rollout undo deployment <deployment-name>
+```
+
+When executing a rolling update use --record=true to save change history. For example:
+```bash
+kubectl apply -f my-updates.yaml --record=true
+```
+
+
 ## Setup Helm Tiller user
 ```bash
 kubectl create serviceaccount --namespace kube-system tiller

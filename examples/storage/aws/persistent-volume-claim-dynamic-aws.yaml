@@ -1,0 +1,14 @@
+
+# The dynamic provisioning is simple like defining the storage class name, resources and accessModes.
+# It cannot have a selector defined
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: example-dynamic-pvc-ebs
+spec:
+  storageClassName: ebs
+  resources:
+    requests:
+      storage: "10Gi"
+  accessModes:
+    - "ReadWriteOnce"

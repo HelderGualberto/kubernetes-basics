@@ -1,0 +1,13 @@
+# The dynamic provisioning is simple like defining the storage class name, resources and accessModes.
+# It cannot have a selector defined
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: example-dynamic-gce-pvc
+spec:
+  resources:
+    requests:
+      storage: "10Gi"
+  accessModes:
+    - "ReadWriteOnce"
+  storageClassName: gce-standard

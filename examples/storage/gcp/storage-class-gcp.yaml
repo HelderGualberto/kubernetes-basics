@@ -1,0 +1,11 @@
+# By default GCP already assigns the default storage class as a gce-pd type. But if you want
+# to specify different configuration you must create it your own
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-standard
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-standard # Could be pd-ssd. It's faster
+  fstype: ext4
+  replication-type: none
