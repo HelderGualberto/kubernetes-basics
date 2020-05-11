@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: example-rs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example-rs
+  template:
+    metadata:
+      name: example-rs-tmp
+      labels:
+        app: example-rs
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80

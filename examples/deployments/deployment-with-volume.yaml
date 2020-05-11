@@ -1,5 +1,4 @@
-# This CAN'T be done via Deployments, insted use StatefulSets.
+# This CAN'T be done via Deployments, unless the number of replicas is 1, insted use StatefulSets.
 # A deployment dont care about the PODs uniqueness so it's not possible to manage
-# multiple PODs using the same volume. As well as when attaching to a volume it MUST run
-# in a specific sequence, one after another, what the Deployment also dont care about.
-# So USE STATEFULSETS
+# multiple PODs using the same volume.
+# So to create multiple stable PVs USE STATEFULSETS

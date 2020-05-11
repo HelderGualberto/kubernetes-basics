@@ -1,0 +1,21 @@
+# It's body is exactelly the same as a ReplicaSet insted by the kind of service
+# WARN: This is the old version of ReplicaSet, use Deployments or ReplicaSets insted of ReplicationControler
+apiVersion: v1
+kind: ReplicationController
+metadata: 
+  name: example-rc
+spec:
+  replicas: 3
+  selector:
+    app: rc
+  template:
+    metadata:
+      name: rc-pod
+      labels:
+        app: rc
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80

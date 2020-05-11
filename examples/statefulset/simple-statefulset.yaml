@@ -24,7 +24,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: web # It don't need a label for service selection because it don't manage network
+  name: web
 spec:
   selector:
     matchLabels:
@@ -48,14 +48,13 @@ spec:
           mountPath: /usr/share/nginx/html
   # On a provider this automatically provisions a persistent volume.
   # Note that for each replica a new PV will be created, só take care when over estimating a disk size.
-  # Each replica will have its own PV. All PVs arent shared.
+  # All PVs are not shared.
   volumeClaimTemplates: 
   - metadata:
       name: www
     spec:
       accessModes: 
       - "ReadWriteOnce"
-      storageClassName: gce-standard
       resources:
         requests:
           storage: 1Gi
