@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  completions: 15 # This means that the jobs is finished when all completitions are reached
+  parallelism: 5  # This means that a least 5 pods could run at the same time
+  template:
+    spec:
+      containers:
+      - name: pi # This example calculates pi value to 2000 decimals
+        image: perl
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: Never
+  backoffLimit: 4 # Try the execution 4 times (if it fails) before stop
+ 
+  # activeDeadlineSeconds: Time the job could stay alive in seconds. If this time exceeds, and the jobs is still running,
+  # the jobs and its pods are terminated with Failure status deadlineExceded. It's a way of cleaning
+  # up jobs before it has finished
+  activeDeadlineSeconds: 200 
