@@ -1,0 +1,30 @@
+# The CronJob body is similar to Jobs, but has the additional schedule field
+
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      completions: 1 # This means that the jobs is finished when all completitions are reached
+      parallelism: 1  # This means that a least 5 pods could run at the same time
+      template:
+        spec:
+          containers:
+          - name: pi # This example calculates pi value to 2000 decimals
+            image: perl
+            command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+          restartPolicy: Never
+      backoffLimit: 4 # Try the execution 4 times (if it fails) before stop
+      
+      # This field is used by TTL Controller to clean up Jobs after termination.
+      # If this field is not set the Jobs wont be cleaned up.
+      # This only works on clusters that heve the TTLAfterFinished feature enabled.
+      ttlSecondsAfterFinished: 0
+
+      # activeDeadlineSeconds: Time the job could stay alive in seconds. If this time exceeds, and the jobs is still running,
+      # the jobs and its pods are terminated with Failure status deadlineExceded. It's a way of cleaning
+      # up jobs before it has finished
+      activeDeadlineSeconds: 200

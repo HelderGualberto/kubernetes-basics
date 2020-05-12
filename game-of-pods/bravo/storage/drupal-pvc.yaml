@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: drupal-pvc
+spec:
+  selector:
+    matchLabels:
+      pv: drupal-pv
+  resources:
+    requests:
+      storage: "5Gi"
+  accessModes:
+    - "ReadWriteOnce"
+  volumeMode: Filesystem

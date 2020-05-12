@@ -24,15 +24,21 @@ spec:
               name: drupal-mysql-pv
           env:
             - name: MYSQL_USER
-              value: root
+              valueFrom:
+                secretKeyRef: 
+                  name: drupal-mysql-secret
+                  key: MYSQL_USER
             - name: MYSQL_DATABASE
-              value: drupal-database
+              valueFrom:
+                secretKeyRef: 
+                  name: drupal-mysql-secret
+                  key: MYSQL_DATABASE
             - name: MYSQL_ROOT_PASSWORD
-              value: root_password
+              valueFrom:
+                secretKeyRef: 
+                  name: drupal-mysql-secret
+                  key: MYSQL_ROOT_PASSWORD
       volumes:
         - name: drupal-mysql-pv
           persistentVolumeClaim:
             claimName: drupal-mysql-pvc
-        - name: drupal-mysql-secret
-          secret:
-            secretName: drupal-mysql-secret

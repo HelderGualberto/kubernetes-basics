@@ -1,0 +1,22 @@
+# OBS: On Minikube you MUST enable the ingress addon
+# > minikube addons enable ingress
+
+# On any other cluster (AWS,GCP,Azure,OnPremisse) you must install the nginx ingress controller to run this example.
+# You cloud also use cloud build in services for http load balancing (https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: / # Tells the Ingress to use the nginx Ingress Controller
+spec:
+  rules:
+  # It will filter the application by it's DNS. If more then one application uses the same loadbalancer IP
+  # and has no path to map, just use the host DNS to map the application.
+  - host: app.my.domain.com # This must be a valid DNS, use some DNS route service to make it available.
+    http:
+      paths:
+      - backend:
+          serviceName: internal-service # The service name to forward to
+          servicePort: 8080   # The port on service to forward

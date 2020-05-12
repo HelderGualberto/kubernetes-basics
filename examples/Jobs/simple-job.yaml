@@ -13,7 +13,12 @@ spec:
         command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
       restartPolicy: Never
   backoffLimit: 4 # Try the execution 4 times (if it fails) before stop
- 
+  
+  # This field is used by TTL Controller to clean up Jobs after termination.
+  # If this field is not set the Jobs wont be cleaned up.
+  # This only works on clusters that heve the TTLAfterFinished feature enabled.
+  ttlSecondsAfterFinished: 10 
+
   # activeDeadlineSeconds: Time the job could stay alive in seconds. If this time exceeds, and the jobs is still running,
   # the jobs and its pods are terminated with Failure status deadlineExceded. It's a way of cleaning
   # up jobs before it has finished

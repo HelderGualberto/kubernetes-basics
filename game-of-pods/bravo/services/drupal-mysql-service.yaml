@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: drupal-mysql-service
+spec:
+  selector:
+    app: drupal-mysql-pods
+  ports:
+  - port: 3306
+    targetPort: 3306
