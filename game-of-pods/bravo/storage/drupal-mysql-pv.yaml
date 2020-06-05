@@ -5,10 +5,12 @@ metadata:
   labels:
     pv: drupal-mysql-pv
 spec:
+  volumeMode: Filesystem
+  storageClassName: "no-provisioner" # Indicates that no provisioner will be used
   capacity:
-    storage: "5G"
+    storage: "5Gi"
   accessModes:
     - "ReadWriteOnce"
   hostPath:
     path: "/drupal-mysql-data"
-  storageClassName: local-storage
+    type: "Directory" # This is mandatory on Kubernetes v1.11

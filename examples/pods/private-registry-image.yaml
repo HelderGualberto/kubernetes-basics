@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-private-registry
+spec:
+  containers:
+    - name: private-image
+      image: private-registry.io/<username>/<image>:<tag>
+  imagePullSecrets:
+    - private-registry-secret-name

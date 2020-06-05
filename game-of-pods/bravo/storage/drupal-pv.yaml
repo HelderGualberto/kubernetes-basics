@@ -5,10 +5,12 @@ metadata:
   labels:
     pv: drupal-pv
 spec:
+  volumeMode: Filesystem
+  storageClassName: "no-provisioner"
   capacity:
-    storage: "5G"
+    storage: "5Gi"
   accessModes:
     - "ReadWriteOnce"
   hostPath:
     path: "/drupal-data"
-  storageClassName: local-storage
+    type: "Directory"

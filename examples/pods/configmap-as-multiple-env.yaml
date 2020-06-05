@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: example-configmap-env
+spec:
+  containers:
+  - name: base
+    image: nginx
+    envFrom:
+    - configMapRef: 
+      name: example-config-map-yaml # This will automatically create all properties on configmap as envs on the Pod.

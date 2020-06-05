@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cpu-demo
+  namespace: cpu-example
+spec:
+  containers:
+    - name: cpu-demo-ctr
+      image: vish/stress
+      resources:
+        limits:
+          cpu: "1"
+        requests:
+          cpu: "0.5"
+      args:
+      - -cpus
+      - "2"
+      - "2"
+  
+  affinity: # Declares a node affinity to select where the Pod will be scheduled.
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        # Will schedule the Pods on nodes that matches the size
+        # label with values Large OR Medium.
+          - matchExpressions: 
+            - key: size
+              operator: In
+              values:
+                - Large
+                - Medium

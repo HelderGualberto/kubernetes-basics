@@ -3,12 +3,11 @@ kind: PersistentVolumeClaim
 metadata:
   name: drupal-mysql-pvc
 spec:
-  selector:
-    matchLabels:
-      pv: drupal-mysql-pv
+  volumeMode: Filesystem
+  volumeName: drupal-mysql-pv # For direct binding use this instead of selector
+  storageClassName: no-provisioner
   resources:
     requests:
       storage: "5Gi"
   accessModes:
     - "ReadWriteOnce"
-  volumeMode: Filesystem

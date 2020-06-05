@@ -1,0 +1,15 @@
+apiVersion: certificates.k8s.io/v1beta1
+kind: CertificateSigningRequest
+metadata:
+  name: helder # The Certificate name, could be the application or user name
+spec:
+  groups:
+    - system:authenticated # Group to add on the certificate
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+  request:
+    <BASE_64_CRS> # The Certificate Sign Request encoded in base64 in a single line (without \n)
+
+  

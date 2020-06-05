@@ -1,0 +1,21 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata: 
+  name: developer
+rules:
+  - apiGroups: # List of API groups to apply the role.
+      - "" # Empty for core group
+    resources: # List of resources to allow access
+      - pods 
+    verbs: # List of operations for resources
+      - get 
+      - list
+      - update
+      - create
+      - delete
+    resourceNames: # This will restrict user access to object level.
+      - "pod1"
+      - "pod2"
+  - apiGroups: [""] # Same as before but with another yaml format
+    resources: ["ConfigMap"]
+    verbs: ["create"]

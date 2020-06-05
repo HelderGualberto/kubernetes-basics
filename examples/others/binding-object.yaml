@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Binding
+metadata:
+  name: pod-name
+target:
+  apiVersion: v1
+  kind: Node
+  target: NodeName

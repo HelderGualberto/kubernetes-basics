@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-private-registry
+spec:
+  containers:
+    - name: private-image
+      image: nginx
+      ports:
+        - containerPort: 8080
+  securityContext:
+    runAsUser: 1000
