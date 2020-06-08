@@ -10,3 +10,5 @@ spec:
         - containerPort: 8080
   securityContext:
     runAsUser: 1000
+    capabilities: 
+      add: ["SYS_TIME"]

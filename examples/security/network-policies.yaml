@@ -5,14 +5,24 @@ metadata:
 spec:
   podSelector:
     matchLables:
-      network-role: db # Select which pods will have the role
+      network-role: db # Which pods will have the firewall rule
   policyTypes:
     - Ingress # Policy type could be ingress/Egress
+    - Egress
   ingress: 
     - from:
       - podSelector:
           matchLables:
-            name: api-pod # Select from which pod the ingress will be comming from
+            name: api-pod # Which pods are allowed to access the selected Pods. (allowed source hosts)
       ports:
         - protocol: TCP
           port: 3306
+  egress:
+    - to:
+      - podSelector:
+          matchLabels:
+            name: internal
+      ports:
+        - port: 3306
+          protocol: TCP
+    
