@@ -47,13 +47,13 @@ spec:
         - name: www
           mountPath: /usr/share/nginx/html
   # On a provider this automatically provisions a persistent volume.
-  # Note that for each replica a new PV will be created, só take care when over estimating a disk size.
+  # Note that for each replica a new PV will be created, so take care when over estimating a disk size.
   # All PVs are not shared.
-  volumeClaimTemplates: 
+  volumeClaimTemplates:
   - metadata:
       name: www
     spec:
-      accessModes: 
+      accessModes:
       - "ReadWriteOnce"
       resources:
         requests:

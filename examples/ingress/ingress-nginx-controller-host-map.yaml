@@ -9,14 +9,27 @@ kind: Ingress
 metadata:
   name: example-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: / # Tells the Ingress to use the nginx Ingress Controller
+    # Extra config for nginx controller. This tells the ingress to rewrite the URL
+    # paths when forwarding traffic to services.
+    # For example, if a user access the URL http://app.my.domain.com/path1 and this 
+    # configuration is not set, the ingress will map:
+    # http://app.my.domain.com/path1 -> app-service:8080/path1
+    # But the service has no path1 configured, so this configuration will rewrite this path to /
+    # http://app.my.domain.com/path1 -> app-service:8080/
+    nginx.ingress.kubernetes.io/rewrite-target: / 
 spec:
   rules:
   # It will filter the application by it's DNS. If more then one application uses the same loadbalancer IP
   # and has no path to map, just use the host DNS to map the application.
-  - host: app.my.domain.com # This must be a valid DNS, use some DNS route service to make it available.
-    http:
-      paths:
-      - backend:
-          serviceName: internal-service # The service name to forward to
-          servicePort: 8080   # The port on service to forward
+    - host: app.my.domain.com # This must be a valid DNS, use some DNS route service to make it available.
+      http:
+        paths:
+          - backend:
+              serviceName: app-service # The service name to forward to
+              servicePort: 8080   # The port on service to forward
+    - host: mail.my.domain.com # This must be a valid DNS, use some DNS route service to make it available.
+      http:
+        paths:
+          - backend:
+              serviceName: email-service # The service name to forward to
+              servicePort: 80   # The port on service to forward

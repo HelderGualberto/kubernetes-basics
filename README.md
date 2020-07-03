@@ -130,6 +130,10 @@ A PersistentVolumeClaim (PVC) is a request for storage by a user. It is similar 
 
 To enable dynamic storage provisioning based on storage class, the cluster administrator needs to enable the DefaultStorageClass admission controller on the API server. This can be done, for example, by ensuring that DefaultStorageClass is among the comma-delimited, ordered list of values for the --enable-admission-plugins flag of the API server component. For more information on API server command-line flags, check kube-apiserver documentation.
 
+### volumeClaimTemplates
+
+Volume claim templates are used within a statefulset to provision PersistentVolumeClaims automaticaly. Those volumes are bounded to each replica and are not shared between them.
+
 ### Secrets
 
 A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. Such information might otherwise be put in a Pod specification or in an image. Users can create secrets and the system also creates some secrets.

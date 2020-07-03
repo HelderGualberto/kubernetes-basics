@@ -1,0 +1,14 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: developer-rolebinding
+  namespace: development
+subjects:
+  - apiGroup: ""
+    name: drogo
+    kind: User
+    namespace: development
+roleRef:
+  apiGroup: ""
+  name: developer-role
+  kind: Role
