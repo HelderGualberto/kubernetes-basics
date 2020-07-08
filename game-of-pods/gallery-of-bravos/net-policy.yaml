@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+  name: iron-gallery-firewall
+spec:
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              run: iron-gallery
+      ports:
+        - port: 3306
+          protocol: TCP
+  podSelector:
+    matchLabels:
+      db: mariadb
